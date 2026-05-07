@@ -2,6 +2,7 @@
  * Define os status possíveis para o ciclo de vida de um pedido.
  */
 public enum StatusPedido {
+	
     /**
      * Pedido criado e ainda não pago.
      */
@@ -21,4 +22,5 @@ public enum StatusPedido {
      * Pedido finalizado e entregue ao cliente.
      */
     FINALIZADO
+    
 }

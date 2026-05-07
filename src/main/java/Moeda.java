@@ -5,11 +5,11 @@ import java.math.RoundingMode;
  * Utilitário para converter e exibir valores monetários no padrão brasileiro.
  */
 public class Moeda {
-    private Moeda() {
-    }
+	
+    private Moeda() {}
 
     /**
-     * Converte um texto monetário para {@link BigDecimal}.
+     * Converte um texto monetário para BigDecimal.
      *
      * Aceita valores como 5,50, 5.50, R$ 5,50 e 1.234,56.
      *
@@ -18,7 +18,8 @@ public class Moeda {
      * @throws NumberFormatException se o texto não representar um valor monetário válido
      */
     public static BigDecimal converterParaBigDecimal(String valor) {
-        if (valor == null || valor.trim().isEmpty()) {
+        
+    	if (valor == null || valor.trim().isEmpty()) {
             throw new NumberFormatException("Valor vazio.");
         }
 
@@ -31,6 +32,7 @@ public class Moeda {
         }
 
         return new BigDecimal(valorNormalizado);
+        
     }
 
     /**
@@ -40,10 +42,13 @@ public class Moeda {
      * @return valor formatado com R$ e virgula decimal
      */
     public static String formatar(BigDecimal valor) {
+    	
         if (valor == null) {
             return "R$ 0,00";
         }
 
         return "R$ " + valor.setScale(2, RoundingMode.HALF_UP).toPlainString().replace(".", ",");
+        
     }
+    
 }

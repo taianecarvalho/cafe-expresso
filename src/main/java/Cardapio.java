@@ -7,11 +7,11 @@ import java.util.Optional;
 
 /**
  * Representa o cardápio de produtos disponíveis na cafeteria.
- *
  * Permite cadastrar produtos, listar os produtos cadastrados e buscar um
  * produto pelo nome.
  */
 public class Cardapio {
+	
     private final List<Produto> produtos;
 
     /**
@@ -23,7 +23,6 @@ public class Cardapio {
 
     /**
      * Cadastra um novo produto no cardápio.
-     *
      * @param nome nome do produto
      * @param preco preço unitário do produto
      * @return produto cadastrado
@@ -37,9 +36,7 @@ public class Cardapio {
 
     /**
      * Lista os produtos cadastrados.
-     *
      * A lista retornada não pode ser alterada diretamente.
-     *
      * @return lista imutável de produtos
      */
     public List<Produto> listarProdutos() {
@@ -49,11 +46,11 @@ public class Cardapio {
     /**
      * Busca um produto pelo nome, desconsiderando diferenças entre letras
      * maiúsculas, minúsculas e acentos.
-     *
      * @param nome nome a ser pesquisado
      * @return produto encontrado, ou vazio se nenhum produto corresponder ao nome
      */
     public Optional<Produto> buscarPorNome(String nome) {
+    	
         if (nome == null || nome.trim().isEmpty()) {
             return Optional.empty();
         }
@@ -67,6 +64,7 @@ public class Cardapio {
         }
 
         return Optional.empty();
+        
     }
 
     private String normalizarNome(String nome) {
@@ -74,4 +72,5 @@ public class Cardapio {
                 .replaceAll("\\p{M}", "")
                 .toLowerCase();
     }
+    
 }

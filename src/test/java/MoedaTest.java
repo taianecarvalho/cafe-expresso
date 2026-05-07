@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 class MoedaTest {
-    @Test
+    
+	@Test
     void deveConverterValorNoPadraoBrasileiro() {
         assertEquals(new BigDecimal("5.50"), Moeda.converterParaBigDecimal("5,50"));
         assertEquals(new BigDecimal("1234.56"), Moeda.converterParaBigDecimal("1.234,56"));
@@ -29,4 +30,5 @@ class MoedaTest {
         assertThrows(NumberFormatException.class, () -> Moeda.converterParaBigDecimal(""));
         assertThrows(NumberFormatException.class, () -> Moeda.converterParaBigDecimal("abc"));
     }
+    
 }

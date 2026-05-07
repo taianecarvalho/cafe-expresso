@@ -1,56 +1,40 @@
-# CafÈ Expresso
+# Caf√© Expresso
 
-## DescriÁ„o
-
-O CafÈ Expresso È um sistema de autoatendimento para cafeterias de pequeno porte.
-O objetivo È permitir que clientes realizem seus pedidos de forma digital, reduzindo filas e agilizando o atendimento.
-
----
-
-## Objetivo
-
-* Permitir a criaÁ„o de pedidos
-* Calcular automaticamente o valor total
-* Controlar o status dos pedidos
-
----
+Sistema de autoatendimento em console para cafeterias, com interfaces de cliente/totem e atendente/cozinha.
 
 ## Funcionalidades
 
-* Cadastro de produtos (nome e preÁo)
-* AdiÁ„o de itens ao pedido
-* C·lculo do valor total
-* Controle de status:
+- Cadastro e consulta de produtos
+- Cria√ß√£o de pedidos com m√∫ltiplos itens e c√°lculo autom√°tico do total
+- Controle de status: `PENDENTE`, `PAGO`, `EM_PREPARO`, `FINALIZADO`
 
-  * PENDENTE
-  * PAGO
-  * EM_PREPARO
-  * FINALIZADO
+## Pr√©-requisitos
 
----
+- Java 11+
+- Maven 3.6+
 
-## Estrutura Inicial
+## Instala√ß√£o
 
-O sistema ser· composto por:
+```bash
+git clone https://github.com/taianecarvalho/cafe-expresso.git
+cd cafe-expresso
+mvn compile
+```
 
-* Produto
-* ItemPedido
-* Pedido
-* StatusPedido (enum)
+## Como executar
 
----
+```bash
+mvn compile exec:java "-Dexec.mainClass=Main"
+```
 
-## Tecnologias
+Ou rode `Main.java` direto pelo Eclipse.
 
-* Java
-* Eclipse
-* Git e GitHub
-* JUnit (para testes)
+## Testes
 
----
+```bash
+mvn test
+```
 
 ## Autora
 
 Taiane Carvalho dos Santos
-
----

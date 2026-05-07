@@ -1,4 +1,6 @@
+import java.io.PrintStream;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +13,17 @@ import java.util.Scanner;
  * atendente, usada no balcão/cozinha.
  */
 public class Main {
-    private static final Scanner SCANNER = new Scanner(System.in);
+	
+    private static final Charset CONSOLE_CHARSET =
+            System.getProperty("os.name").toLowerCase().contains("win")
+                    ? Charset.forName("Cp850")
+                    : Charset.defaultCharset();
+
+    static {
+        System.setOut(new PrintStream(System.out, true, CONSOLE_CHARSET));
+    }
+
+    private static final Scanner SCANNER = new Scanner(System.in, CONSOLE_CHARSET);
     private static final Cardapio CARDAPIO = new Cardapio();
     private static final List<Pedido> PEDIDOS = new ArrayList<>();
     private static Pedido pedidoDoCliente = new Pedido();
@@ -22,6 +34,7 @@ public class Main {
      * @param args argumentos de linha de comando não utilizados
      */
     public static void main(String[] args) {
+    	
         cadastrarProdutosIniciais();
 
         int opcao;
@@ -32,7 +45,9 @@ public class Main {
         } while (opcao != 0);
 
         System.out.println("Sistema encerrado.");
+        
         SCANNER.close();
+        
     }
 
     private static void cadastrarProdutosIniciais() {
@@ -161,27 +176,33 @@ public class Main {
     }
 
     private static void cadastrarProduto() {
+    	
         String nome = lerTexto("Nome do produto: ");
         BigDecimal preco = lerDecimal("Preço do produto: ");
 
         Produto produto = CARDAPIO.cadastrarProduto(nome, preco);
         System.out.println("Produto cadastrado: " + produto);
+        
     }
 
     private static void listarCardapio() {
+    	
         if (CARDAPIO.listarProdutos().isEmpty()) {
             System.out.println("Cardápio vazio.");
             return;
         }
 
         System.out.println("Cardápio:");
+        
         for (Produto produto : CARDAPIO.listarProdutos()) {
             System.out.println("- " + produto);
         }
+        
     }
 
     private static void adicionarItemAoPedido() {
-        String nome = lerTexto("Nome do produto: ");
+      
+    	String nome = lerTexto("Nome do produto: ");
         Optional<Produto> produto = CARDAPIO.buscarPorNome(nome);
 
         if (!produto.isPresent()) {
@@ -190,22 +211,28 @@ public class Main {
         }
 
         int quantidade = lerInteiro("Quantidade: ");
+       
         pedidoDoCliente.adicionarItem(produto.get(), quantidade);
+        
         System.out.println("Item adicionado ao pedido.");
+        
     }
 
     private static void pagarPedidoDoCliente() {
-        pedidoDoCliente.registrarPagamento();
+        
+    	pedidoDoCliente.registrarPagamento();
         PEDIDOS.add(pedidoDoCliente);
 
         System.out.println("Pagamento registrado.");
         System.out.println("Pedido " + PEDIDOS.size() + " enviado para a cozinha.");
 
         pedidoDoCliente = new Pedido();
+        
     }
 
     private static void listarPedidos() {
-        if (PEDIDOS.isEmpty()) {
+    
+    	if (PEDIDOS.isEmpty()) {
             System.out.println("Nenhum pedido na fila.");
             return;
         }
@@ -213,6 +240,7 @@ public class Main {
         for (int i = 0; i < PEDIDOS.size(); i++) {
             exibirPedido("Pedido " + (i + 1), PEDIDOS.get(i));
         }
+        
     }
 
     private static void alterarPedidoParaPreparo() {
@@ -228,7 +256,8 @@ public class Main {
     }
 
     private static Pedido selecionarPedido() {
-        listarPedidos();
+        
+    	listarPedidos();
 
         if (PEDIDOS.isEmpty()) {
             throw new IllegalStateException("Não há pedidos disponíveis.");
@@ -241,10 +270,12 @@ public class Main {
         }
 
         return PEDIDOS.get(numeroPedido - 1);
+        
     }
 
     private static void exibirPedido(String titulo, Pedido pedido) {
-        System.out.println();
+        
+    	System.out.println();
         System.out.println(titulo);
         System.out.println("Status: " + pedido.getStatus());
 
@@ -258,6 +289,7 @@ public class Main {
         }
 
         System.out.println("Total: " + Moeda.formatar(pedido.calcularTotal()));
+        
     }
 
     private static String lerTexto(String mensagem) {
@@ -266,20 +298,26 @@ public class Main {
     }
 
     private static int lerInteiro(String mensagem) {
-        while (true) {
-            System.out.print(mensagem);
+      
+    	while (true) {
+            
+    		System.out.print(mensagem);
 
             try {
                 return Integer.parseInt(SCANNER.nextLine());
             } catch (NumberFormatException erro) {
                 System.out.println("Informe um número inteiro válido.");
             }
+            
         }
+    	
     }
 
     private static BigDecimal lerDecimal(String mensagem) {
-        while (true) {
-            System.out.print(mensagem);
+       
+    	while (true) {
+           
+    		System.out.print(mensagem);
             String valor = SCANNER.nextLine();
 
             try {
@@ -287,6 +325,9 @@ public class Main {
             } catch (NumberFormatException erro) {
                 System.out.println("Informe um valor monetário válido.");
             }
+            
         }
+    	
     }
+    
 }

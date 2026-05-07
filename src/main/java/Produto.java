@@ -3,23 +3,23 @@ import java.util.Objects;
 
 /**
  * Representa um produto disponível no cardápio da cafeteria.
- *
  * Um produto possui nome e preço unitário. A classe valida os dados de
  * entrada para impedir produtos sem nome ou com preço inválido.
  */
 public class Produto {
+	
     private final String nome;
     private final BigDecimal preco;
 
     /**
      * Cria um produto com nome e preço unitário.
-     *
      * @param nome nome do produto
      * @param preco preço unitário do produto
      * @throws IllegalArgumentException se o nome estiver vazio ou o preço não for maior que zero
      */
     public Produto(String nome, BigDecimal preco) {
-        if (nome == null || nome.trim().isEmpty()) {
+        
+    	if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("O nome do produto deve ser informado.");
         }
 
@@ -29,11 +29,11 @@ public class Produto {
 
         this.nome = nome.trim();
         this.preco = preco;
+        
     }
 
     /**
      * Retorna o nome do produto.
-     *
      * @return nome do produto
      */
     public String getNome() {
@@ -42,7 +42,6 @@ public class Produto {
 
     /**
      * Retorna o preço unitário do produto.
-     *
      * @return preço unitário
      */
     public BigDecimal getPreco() {
@@ -61,6 +60,7 @@ public class Produto {
 
     @Override
     public boolean equals(Object obj) {
+    	
         if (this == obj) {
             return true;
         }
@@ -70,6 +70,9 @@ public class Produto {
         }
 
         Produto other = (Produto) obj;
+        
         return Objects.equals(nome, other.nome) && Objects.equals(preco, other.preco);
+  
     }
+    
 }

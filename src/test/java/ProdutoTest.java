@@ -6,19 +6,24 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 class ProdutoTest {
-    @Test
+   
+	@Test
     void deveCriarProdutoValido() {
-        Produto produto = new Produto("Café Expresso", new BigDecimal("5.50"));
+       
+		Produto produto = new Produto("Café Expresso", new BigDecimal("5.50"));
 
         assertEquals("Café Expresso", produto.getNome());
         assertEquals(new BigDecimal("5.50"), produto.getPreco());
+        
     }
 
     @Test
     void deveRemoverEspacosDoNome() {
-        Produto produto = new Produto("  Café Expresso  ", new BigDecimal("5.50"));
+       
+    	Produto produto = new Produto("  Café Expresso  ", new BigDecimal("5.50"));
 
         assertEquals("Café Expresso", produto.getNome());
+        
     }
 
     @Test
@@ -36,10 +41,13 @@ class ProdutoTest {
 
     @Test
     void deveCompararProdutosPorNomeEPreco() {
-        Produto produto = new Produto("Café Expresso", new BigDecimal("5.50"));
+       
+    	Produto produto = new Produto("Café Expresso", new BigDecimal("5.50"));
         Produto outroProdutoIgual = new Produto("Café Expresso", new BigDecimal("5.50"));
 
         assertEquals(produto, outroProdutoIgual);
         assertEquals(produto.hashCode(), outroProdutoIgual.hashCode());
+        
     }
+    
 }
