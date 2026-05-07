@@ -4,11 +4,11 @@ name: Java Unit Test CI
 # Define os eventos que disparam a execução deste pipeline
 on:
   push:
-    # Executa sempre que houver um push na branch principal (main)
-    branches: [ "main" ]
+    # Executa sempre que houver um push na branch principal (master)
+    branches: [ "master" ]
   pull_request:
     # Executa sempre que um Pull Request for aberto para a branch principal
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 # Variáveis globais acessíveis em todos os jobs deste arquivo
 env:
