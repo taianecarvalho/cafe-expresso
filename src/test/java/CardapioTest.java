@@ -8,52 +8,113 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 class CardapioTest {
-	
+
     @Test
-    void deveCadastrarProdutoNoCardapio() {
-        
+    void deveCadastrarComNome() {
+
     	Cardapio cardapio = new Cardapio();
 
         Produto produto = cardapio.cadastrarProduto("Cappuccino", new BigDecimal("8.50"));
 
         assertEquals("Cappuccino", produto.getNome());
-        assertEquals(new BigDecimal("8.50"), produto.getPreco());
-        assertEquals(1, cardapio.listarProdutos().size());
-        
+
     }
 
     @Test
-    void deveBuscarProdutoPorNomeIgnorandoMaiusculasEAcentos() {
-        
+    void deveCadastrarComPreco() {
+
+    	Cardapio cardapio = new Cardapio();
+
+        Produto produto = cardapio.cadastrarProduto("Cappuccino", new BigDecimal("8.50"));
+
+        assertEquals(new BigDecimal("8.50"), produto.getPreco());
+
+    }
+
+    @Test
+    void deveAdicionarProdutoNaLista() {
+
+    	Cardapio cardapio = new Cardapio();
+
+        cardapio.cadastrarProduto("Cappuccino", new BigDecimal("8.50"));
+
+        assertEquals(1, cardapio.listarProdutos().size());
+
+    }
+
+    @Test
+    void deveBuscarIgnorandoMaiusculasEAcentos() {
+
+    	Cardapio cardapio = new Cardapio();
+        cardapio.cadastrarProduto("Café Expresso", new BigDecimal("5.50"));
+
+        assertTrue(cardapio.buscarPorNome("cafe expresso").isPresent());
+
+    }
+
+    @Test
+    void deveRetornarProdutoEncontrado() {
+
     	Cardapio cardapio = new Cardapio();
         Produto produto = cardapio.cadastrarProduto("Café Expresso", new BigDecimal("5.50"));
 
-        assertTrue(cardapio.buscarPorNome("cafe expresso").isPresent());
         assertEquals(produto, cardapio.buscarPorNome("CAFÉ EXPRESSO").get());
-        
+
     }
 
     @Test
-    void deveRetornarVazioAoBuscarProdutoInexistenteOuNomeInvalido() {
-        
+    void deveRetornarVazioQuandoNaoEncontra() {
+
     	Cardapio cardapio = new Cardapio();
         cardapio.cadastrarProduto("Café Expresso", new BigDecimal("5.50"));
 
         assertFalse(cardapio.buscarPorNome("Chá").isPresent());
-        assertFalse(cardapio.buscarPorNome("").isPresent());
-        assertFalse(cardapio.buscarPorNome(null).isPresent());
-        
+
     }
 
     @Test
-    void deveProtegerListaDeProdutosContraAlteracaoExterna() {
-        
+    void deveRetornarVazioParaNomeEmBranco() {
+
+    	Cardapio cardapio = new Cardapio();
+        cardapio.cadastrarProduto("Café Expresso", new BigDecimal("5.50"));
+
+        assertFalse(cardapio.buscarPorNome("").isPresent());
+
+    }
+
+    @Test
+    void deveRetornarVazioParaNomeNulo() {
+
+    	Cardapio cardapio = new Cardapio();
+        cardapio.cadastrarProduto("Café Expresso", new BigDecimal("5.50"));
+
+        assertFalse(cardapio.buscarPorNome(null).isPresent());
+
+    }
+
+    @Test
+    void deveImpedirAlteracaoDaLista() {
+
     	Cardapio cardapio = new Cardapio();
         cardapio.cadastrarProduto("Café Expresso", new BigDecimal("5.50"));
 
         assertThrows(UnsupportedOperationException.class, () -> cardapio.listarProdutos().clear());
-        assertEquals(1, cardapio.listarProdutos().size());
-        
+
     }
-    
+
+    @Test
+    void devePreservarListaAposTentativaDeLimpar() {
+
+    	Cardapio cardapio = new Cardapio();
+        cardapio.cadastrarProduto("Café Expresso", new BigDecimal("5.50"));
+
+        try {
+            cardapio.listarProdutos().clear();
+        } catch (UnsupportedOperationException ignored) {
+        }
+
+        assertEquals(1, cardapio.listarProdutos().size());
+
+    }
+
 }

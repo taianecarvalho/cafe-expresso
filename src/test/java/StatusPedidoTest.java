@@ -3,25 +3,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class StatusPedidoTest {
-  
-	@Test
-    void deveConterStatusNaOrdemDoFluxoDoPedido() {
-        
-		StatusPedido[] status = StatusPedido.values();
 
-        assertEquals(StatusPedido.PENDENTE, status[0]);
-        assertEquals(StatusPedido.PAGO, status[1]);
-        assertEquals(StatusPedido.EM_PREPARO, status[2]);
-        assertEquals(StatusPedido.FINALIZADO, status[3]);
-        
+	@Test
+    void devePendenteSerOPrimeiro() {
+        assertEquals(StatusPedido.PENDENTE, StatusPedido.values()[0]);
     }
 
     @Test
-    void deveConverterTextoParaStatus() {
+    void devePagoSerOSegundo() {
+        assertEquals(StatusPedido.PAGO, StatusPedido.values()[1]);
+    }
+
+    @Test
+    void deveEmPreparoSerOTerceiro() {
+        assertEquals(StatusPedido.EM_PREPARO, StatusPedido.values()[2]);
+    }
+
+    @Test
+    void deveFinalizadoSerOQuarto() {
+        assertEquals(StatusPedido.FINALIZADO, StatusPedido.values()[3]);
+    }
+
+    @Test
+    void deveConverterTextoParaPendente() {
         assertEquals(StatusPedido.PENDENTE, StatusPedido.valueOf("PENDENTE"));
+    }
+
+    @Test
+    void deveConverterTextoParaPago() {
         assertEquals(StatusPedido.PAGO, StatusPedido.valueOf("PAGO"));
+    }
+
+    @Test
+    void deveConverterTextoParaEmPreparo() {
         assertEquals(StatusPedido.EM_PREPARO, StatusPedido.valueOf("EM_PREPARO"));
+    }
+
+    @Test
+    void deveConverterTextoParaFinalizado() {
         assertEquals(StatusPedido.FINALIZADO, StatusPedido.valueOf("FINALIZADO"));
     }
-    
+
 }
